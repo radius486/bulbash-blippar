@@ -1,0 +1,61 @@
+{
+  "fileInfo": {
+    "jsAPIVersion": "1.3.3"
+  },
+  "peel": {
+    "orientation": "portrait",
+    "type": "fit"
+  },
+  "children": [
+    {
+      "className": "Scene",
+      "name": "default",
+      "children": [
+        {
+          "children": [],
+          "className": "Mesh",
+          "name": "speaker_out",
+          "mesh": "Dinamik_out_42.md2",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            2,
+            2,
+            2
+          ],
+          "texture": "dinamik_texture.jpg",
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "children": [],
+          "className": "Mesh",
+          "name": "speaker_in",
+          "mesh": "Dinamik_in_43.md2",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            2,
+            2,
+            2
+          ],
+          "texture": "dinamik_texture.jpg",
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

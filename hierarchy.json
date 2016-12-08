@@ -1,0 +1,49 @@
+{
+  "children": [
+    {
+      "children": [],
+      "className": "Mesh",
+      "name": "speaker_out",
+      "mesh": "Dinamik_out_42.md2",
+      "rotation": [
+        9.334668062444632e-06,
+        -0.0,
+        0.0
+      ],
+      "scale": [
+        0.40911155939102173,
+        0.40911155939102184,
+        0.40911155939102184
+      ],
+      "texture": "dinamik_texture.jpg",
+      "translation": [
+        0.0,
+        150.50930786132812,
+        38.67265319824219
+      ]
+    },
+    {
+      "children": [],
+      "className": "Mesh",
+      "name": "speaker_in",
+      "mesh": "Dinamik_in_43.md2",
+      "rotation": [
+        9.334668062444632e-06,
+        -0.0,
+        0.0
+      ],
+      "scale": [
+        0.40911155939102173,
+        0.40911155939102184,
+        0.40911155939102184
+      ],
+      "texture": "dinamik_texture.jpg",
+      "translation": [
+        0.0,
+        150.50930786132812,
+        38.67265319824219
+      ]
+    }
+  ],
+  "className": "Transform"
+}
