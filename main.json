@@ -22,17 +22,18 @@
             0
           ],
           "scale": [
-            2,
-            2,
+            5,
+            5,
             2
           ],
           "texture": "dinamik_texture.jpg",
           "translation": [
             0,
             0,
-            0
+            50
           ]
         },
+
         {
           "children": [],
           "className": "Mesh",
@@ -44,14 +45,249 @@
             0
           ],
           "scale": [
-            2,
-            2,
+            5,
+            5,
             2
           ],
           "texture": "dinamik_texture.jpg",
           "translation": [
             0,
             0,
+            50
+          ]
+        },
+
+        {
+          "children": [],
+          "className": "Mesh",
+          "name":"year2017",
+          "mesh": "2017_42.md2",
+          "rotation": [
+            -90.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            10.0,
+            1.0,
+            10.0
+          ],
+          "texture": "2017_texture.jpg",
+          "translation": [
+            0.0,
+            -1650,
+            -100
+          ]
+        },
+
+        {
+          "children": [],
+          "className": "Mesh",
+          "mesh": "Object001_42.md2",
+          "rotation": [
+            -90.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            10.0,
+            10.0,
+            10.0
+          ],
+          "texture": "kapli_all.jpg",
+          "translation": [
+            0.0,
+            -1500,
+            0.0
+          ]
+        },
+        {
+          "children": [],
+          "className": "Mesh",
+          "mesh": "Object003_44.md2",
+          "rotation": [
+            -90.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            10.0,
+            10.0,
+            10.0
+          ],
+          "texture": "kapli_all.jpg",
+          "translation": [
+            0.0,
+            -1500,
+            0.0
+          ]
+        },
+        {
+          "children": [],
+          "className": "Mesh",
+          "mesh": "Object002_43.md2",
+          "rotation": [
+            -90.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            10.0,
+            10.0,
+            10.0
+          ],
+          "texture": "kapli_all.jpg",
+          "translation": [
+            0.0,
+            -1500,
+            0.0
+          ]
+        },
+
+        {
+          "children": [],
+          "className": "Mesh",
+          "mesh": "knopka_red_drop_03_48.md2",
+          "rotation": [
+            -90.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            10.0,
+            10.0,
+            10.0
+          ],
+          "texture": "knopki_all.jpg",
+          "translation": [
+            0.0,
+            -1500,
+            0
+          ]
+        },
+        {
+          "children": [],
+          "className": "Mesh",
+          "mesh": "knopka_blue_43.md2",
+          "rotation": [
+            -90.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            10.0,
+            10.0,
+            10.0
+          ],
+          "texture": "knopki_all.jpg",
+          "translation": [
+            0.0,
+            -1500,
+            0
+          ]
+        },
+        {
+          "children": [],
+          "className": "Mesh",
+          "mesh": "knopka_gold_42.md2",
+          "rotation": [
+            -90.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            10.0,
+            10.0,
+            10.0
+          ],
+          "texture": "knopki_all.jpg",
+          "translation": [
+            0.0,
+            -1500,
+            0
+          ]
+        },
+        {
+          "children": [],
+          "className": "Mesh",
+          "mesh": "knopka_silver_44.md2",
+          "rotation": [
+            -90.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            10.0,
+            10.0,
+            10.0
+          ],
+          "texture": "knopki_all.jpg",
+          "translation": [
+            0.0,
+            -1500,
+            0
+          ]
+        },
+        {
+          "children": [],
+          "className": "Mesh",
+          "mesh": "knopka_red_drop_01_46.md2",
+          "rotation": [
+            -90.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            10.0,
+            10.0,
+            10.0
+          ],
+          "texture": "knopki_all.jpg",
+          "translation": [
+            0.0,
+            -1500,
+            0
+          ]
+        },
+        {
+          "children": [],
+          "className": "Mesh",
+          "mesh": "knopka_red_drop_02_45.md2",
+          "rotation": [
+            -90.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            10.0,
+            10.0,
+            10.0
+          ],
+          "texture": "knopki_all.jpg",
+          "translation": [
+            0.0,
+            -1500,
+            0
+          ]
+        },
+        {
+          "children": [],
+          "className": "Mesh",
+          "mesh": "knopka_red_47.md2",
+          "rotation": [
+            -90.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            10.0,
+            10.0,
+            10.0
+          ],
+          "texture": "knopki_all.jpg",
+          "translation": [
+            0.0,
+            -1500,
             0
           ]
         }
