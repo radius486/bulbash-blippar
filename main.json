@@ -14,7 +14,7 @@
         {
           "children": [],
           "className": "Mesh",
-          "name": "speaker_out",
+          "name": "speakerOut",
           "mesh": "Dinamik_out_42.md2",
           "rotation": [
             0,
@@ -37,7 +37,7 @@
         {
           "children": [],
           "className": "Mesh",
-          "name": "speaker_in",
+          "name": "speakerIn",
           "mesh": "Dinamik_in_43.md2",
           "rotation": [
             0,
@@ -83,6 +83,7 @@
         {
           "children": [],
           "className": "Mesh",
+          "name": "drops1",
           "mesh": "Object001_42.md2",
           "rotation": [
             -90.0,
@@ -104,6 +105,7 @@
         {
           "children": [],
           "className": "Mesh",
+          "name": "drops2",
           "mesh": "Object003_44.md2",
           "rotation": [
             -90.0,
@@ -125,6 +127,7 @@
         {
           "children": [],
           "className": "Mesh",
+          "name": "drops3",
           "mesh": "Object002_43.md2",
           "rotation": [
             -90.0,
@@ -147,6 +150,7 @@
         {
           "children": [],
           "className": "Mesh",
+          "name": "buttonRed",
           "mesh": "knopka_red_drop_03_48.md2",
           "rotation": [
             -90.0,
@@ -168,6 +172,7 @@
         {
           "children": [],
           "className": "Mesh",
+          "name": "buttonBlue",
           "mesh": "knopka_blue_43.md2",
           "rotation": [
             -90.0,
@@ -189,6 +194,7 @@
         {
           "children": [],
           "className": "Mesh",
+          "name": "buttonGold",
           "mesh": "knopka_gold_42.md2",
           "rotation": [
             -90.0,
@@ -210,6 +216,7 @@
         {
           "children": [],
           "className": "Mesh",
+          "name": "buttonSilver",
           "mesh": "knopka_silver_44.md2",
           "rotation": [
             -90.0,
@@ -231,6 +238,7 @@
         {
           "children": [],
           "className": "Mesh",
+          "name": "buttonRed1",
           "mesh": "knopka_red_drop_01_46.md2",
           "rotation": [
             -90.0,
@@ -252,6 +260,7 @@
         {
           "children": [],
           "className": "Mesh",
+          "name": "buttonRed2",
           "mesh": "knopka_red_drop_02_45.md2",
           "rotation": [
             -90.0,
@@ -273,6 +282,7 @@
         {
           "children": [],
           "className": "Mesh",
+          "name": "buttonRed3",
           "mesh": "knopka_red_47.md2",
           "rotation": [
             -90.0,
