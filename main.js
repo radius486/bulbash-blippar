@@ -28,10 +28,12 @@ scene.onCreate = function() {
 
   scene.buttonRed.on('touchEnd', function() {
     this.setHidden(true);
+    scene.stopSound('backgroundSound');
   });
 
   scene.buttonBlue.on('touchEnd', function() {
     this.setHidden(true);
+    scene.playSound('backgroundSound.mp3', true, 'backgroundSound', 1, 1);
   });
 
   scene.buttonGold.on('touchEnd', function() {
@@ -45,6 +47,7 @@ scene.onShow = function() {
   tranlateButtonX(scene.buttonBlue, 0, 500, 300);
   tranlateButtonX(scene.buttonGold, 0, 700, 300);
   shakeAllButtons(800);
+  scene.playSound('backgroundSound.mp3', true, 'backgroundSound', 0.3, 0.3);
 }
 
 scene.on('trackLost', function () {
