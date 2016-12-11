@@ -151,6 +151,7 @@
           "children": [],
           "className": "Mesh",
           "name": "buttonRed1",
+          "hidden": true,
           "mesh": "knopka_red_drop_03_48.md2",
           "rotation": [
             -90.0,
@@ -238,6 +239,7 @@
         {
           "children": [],
           "className": "Mesh",
+          "hidden": true,
           "name": "buttonRed3",
           "mesh": "knopka_red_drop_01_46.md2",
           "rotation": [
@@ -261,6 +263,7 @@
           "children": [],
           "className": "Mesh",
           "name": "buttonRed2",
+          "hidden": true,
           "mesh": "knopka_red_drop_02_45.md2",
           "rotation": [
             -90.0,
