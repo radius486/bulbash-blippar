@@ -25,10 +25,12 @@ scene.onCreate = function() {
   scene.buttonBlue.setTranslationX(-2000);
   scene.buttonSilver.setTranslationX(-2000);
   scene.buttonGold.setTranslationX(2000);
+  //scene.prepareSound('backgroundSound.mp3', 'backgroundSound');
 
   scene.buttonRed.on('touchEnd', function() {
     this.setHidden(true);
-    scene.stopSound('backgroundSound');
+    //scene.stopSound('backgroundSound');
+    scene.stopSounds();
   });
 
   scene.buttonBlue.on('touchEnd', function() {
@@ -38,6 +40,7 @@ scene.onCreate = function() {
 
   scene.buttonGold.on('touchEnd', function() {
     this.setHidden(true);
+    scene.playSound('swing.mp3', false);
   });
 };
 
