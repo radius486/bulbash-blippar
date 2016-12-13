@@ -8,6 +8,52 @@ var scene = blipp.getScene("default");
 var mW = blipp.getMarker().getWidth();
 var mH = blipp.getMarker().getHeight();
 
+var speakerAnim;
+var speakerAnimPlay = false;
+
+var speaker = {
+  anim: undefined,
+  animPlay: false,
+  currentAmplitude: 5,
+
+  animation: function(amplitude) {
+    if(!this.animPlay) {
+      this.play(amplitude);
+    }
+
+    if(this.animPlay && this.currentAmplitude != amplitude) {
+      this.animationReset();
+      this.play(amplitude);
+    }
+  },
+
+  play: function(amplitude) {
+    this.anim = scene.speakerIn.animate();
+    this.anim.loop()
+      .scale(amplitude, amplitude, 2)
+      .translationZ(45)
+      .duration(200)
+      .onEnd(
+        scene.speakerIn.animate()
+          .scale(5, 5, 2)
+          .translationZ(50)
+          .duration(200)
+      );
+    this.animPlay = true;
+    this.currentAmplitude = amplitude;
+  },
+
+  animationStop: function() {
+    this.animationReset();
+    this.animPlay = false;
+  },
+
+  animationReset: function() {
+    this.anim.stop();
+    scene.speakerIn.setScale(5, 5, 2);
+  }
+}
+
 // Scene creation
 scene.onCreate = function() {
 	scene.speakerOut = scene.getChild("speakerOut");
@@ -28,19 +74,22 @@ scene.onCreate = function() {
   //scene.prepareSound('backgroundSound.mp3', 'backgroundSound');
 
   scene.buttonRed.on('touchEnd', function() {
-    this.setHidden(true);
+    //this.setHidden(true);
     //scene.stopSound('backgroundSound');
     scene.stopSounds();
+    speaker.animationStop();
   });
 
   scene.buttonBlue.on('touchEnd', function() {
-    this.setHidden(true);
+    //this.setHidden(true);
     scene.playSound('backgroundSound.mp3', true, 'backgroundSound', 1, 1);
+    speaker.animation(5.5);
   });
 
   scene.buttonGold.on('touchEnd', function() {
-    this.setHidden(true);
+    //this.setHidden(true);
     scene.playSound('swing.mp3', false);
+    speaker.animation(5.5);
   });
 };
 
@@ -51,6 +100,7 @@ scene.onShow = function() {
   tranlateButtonX(scene.buttonGold, 0, 700, 300);
   shakeAllButtons(800);
   scene.playSound('backgroundSound.mp3', true, 'backgroundSound', 0.3, 0.3);
+  speaker.animation(5.2);
 }
 
 scene.on('trackLost', function () {
@@ -116,4 +166,3 @@ function shakeAllButtons(delayTime) {
     buttonShake(scene.buttonGold, 300);
   });
 }
-
