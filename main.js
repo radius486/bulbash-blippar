@@ -83,7 +83,7 @@ scene.onCreate = function() {
   scene.random = createPlane('random-gray.png', -sW/2 + 50, -sH/2 + 190, sW/15, sW/20, 'left');
   scene.randomActive = createPlane('random-blue.png', -sW/2 + 50, -sH/2 + 190, sW/15, sW/20, 'left');
   scene.play = createPlane('play.png', -sW/2 + sW/2 - sW/7/2, -sH/2 + sW/4/2 - sW/6/2 + 150 , sW/5.5, sW/6, 'left');
-  scene.stop = createPlane('stop.png', -sW/2 + sW/2 - sW/8/2, -sH/2 + sW/4/2 - sW/6/2 + 150 , sW/8, sW/6, 'left');
+  scene.stop = createPlane('stop.png', -sW/2 + sW/2 - sW/7/2, -sH/2 + sW/4/2 - sW/7/2 + 150 , sW/7, sW/7, 'left');
   scene.left = createPlane('left.png', -sW/2 + sW/4 - sW/7/2, -sH/2 + sW/4/2 - sW/8/2 + 150 , sW/8, sW/8, 'left');
   scene.right = createPlane('right.png', sW/2 - sW/4 + sW/7/2 , -sH/2 + sW/4/2 - sW/8/2 + 150 , sW/8, sW/8, 'right');
 
@@ -104,12 +104,7 @@ scene.onCreate = function() {
   });
 
   scene.play.on('touchEnd', function() {
-    this.setHidden(true);
-    scene.stop.setHidden(false);
-    scene.playSound('backgroundSound.mp3', true, 'backgroundSound', 1, 1);
-    //scene.playSound('swing.mp3', false);
-    playing = true;
-    speaker.animation(5.5);
+    playSound('swing.mp3', 1000);
   });
 
   scene.stop.on('touchEnd', function() {
@@ -255,4 +250,19 @@ function showHidePlayer(flag) {
       scene.randomActive.setHidden(true);
     }
   }
+}
+
+function playSound(name, duration) {
+  scene.play.setHidden(true);
+  scene.stop.setHidden(false);
+  scene.playSound(name, false);
+  playing = true;
+  speaker.animation(5.5);
+  delay(duration, function() {
+    scene.stop.setHidden(true);
+    scene.play.setHidden(false);
+    scene.stopSounds();
+    playing = false;
+    speaker.animationStop();
+  });
 }
