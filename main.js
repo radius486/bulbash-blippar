@@ -7,9 +7,13 @@ var scene = blipp.getScene("default");
 // Global variables
 var mW = blipp.getMarker().getWidth();
 var mH = blipp.getMarker().getHeight();
+var sW = blipp.getScreenWidth() * 1.003;
+var sH = blipp.getScreenHeight() * 1.003;
 
 var speakerAnim;
 var speakerAnimPlay = false;
+var playing= false;
+var random = false;
 
 var speaker = {
   anim: undefined,
@@ -73,23 +77,66 @@ scene.onCreate = function() {
   scene.buttonGold.setTranslationX(2000);
   //scene.prepareSound('backgroundSound.mp3', 'backgroundSound');
 
-  scene.buttonRed.on('touchEnd', function() {
-    //this.setHidden(true);
-    //scene.stopSound('backgroundSound');
+
+  scene.player = createPlane('player.png', -sW/2 + 5, -sH/2 + 150, sW - 10, sW/4, 'left');
+  scene.close = createPlane('close.png', sW/2 - 40, -sH/2 + sW/4 + 60, sW/20, sW/20, 'right');
+  scene.random = createPlane('random-gray.png', -sW/2 + 50, -sH/2 + 190, sW/15, sW/20, 'left');
+  scene.randomActive = createPlane('random-blue.png', -sW/2 + 50, -sH/2 + 190, sW/15, sW/20, 'left');
+  scene.play = createPlane('play.png', -sW/2 + sW/2 - sW/7/2, -sH/2 + sW/4/2 - sW/6/2 + 150 , sW/5.5, sW/6, 'left');
+  scene.stop = createPlane('stop.png', -sW/2 + sW/2 - sW/8/2, -sH/2 + sW/4/2 - sW/6/2 + 150 , sW/8, sW/6, 'left');
+  scene.left = createPlane('left.png', -sW/2 + sW/4 - sW/7/2, -sH/2 + sW/4/2 - sW/8/2 + 150 , sW/8, sW/8, 'left');
+  scene.right = createPlane('right.png', sW/2 - sW/4 + sW/7/2 , -sH/2 + sW/4/2 - sW/8/2 + 150 , sW/8, sW/8, 'right');
+
+
+  // scene.randomActive.setHidden(true);
+  // scene.stop.setHidden(true);
+
+  scene.random.on('touchEnd', function() {
+    this.setHidden(true);
+    scene.randomActive.setHidden(false);
+    random = true;
+  });
+
+  scene.randomActive.on('touchEnd', function() {
+    this.setHidden(true);
+    scene.random.setHidden(false);
+    random = false;
+  });
+
+  scene.play.on('touchEnd', function() {
+    this.setHidden(true);
+    scene.stop.setHidden(false);
+    scene.playSound('backgroundSound.mp3', true, 'backgroundSound', 1, 1);
+    //scene.playSound('swing.mp3', false);
+    playing = true;
+    speaker.animation(5.5);
+  });
+
+  scene.stop.on('touchEnd', function() {
+    this.setHidden(true);
+    scene.play.setHidden(false);
     scene.stopSounds();
+    playing = false;
     speaker.animationStop();
   });
 
+  scene.close.on('touchEnd', function() {
+    showHidePlayer(true);
+    scene.stopSounds();
+    playing = false;
+    speaker.animationStop();
+  });
+
+  scene.buttonRed.on('touchEnd', function() {
+    showHidePlayer(false);
+  });
+
   scene.buttonBlue.on('touchEnd', function() {
-    //this.setHidden(true);
-    scene.playSound('backgroundSound.mp3', true, 'backgroundSound', 1, 1);
-    speaker.animation(5.5);
+    showHidePlayer(false);
   });
 
   scene.buttonGold.on('touchEnd', function() {
-    //this.setHidden(true);
-    scene.playSound('swing.mp3', false);
-    speaker.animation(5.5);
+    showHidePlayer(false);
   });
 };
 
@@ -100,11 +147,16 @@ scene.onShow = function() {
   tranlateButtonX(scene.buttonGold, 0, 700, 300);
   shakeAllButtons(800);
   scene.playSound('backgroundSound.mp3', true, 'backgroundSound', 0.3, 0.3);
+  playing = true;
+  showHidePlayer(true);
   speaker.animation(5.2);
+  //scene.buttonSilver.playVideo('backgroundSound.mp3', 'backgroundSound.mp3', false, false, false);
+
 }
 
 scene.on('trackLost', function () {
   showHideAll(true);
+  showHidePlayer(false);
 });
 
 scene.on('track', function () {
@@ -165,4 +217,42 @@ function shakeAllButtons(delayTime) {
     buttonShake(scene.buttonBlue, 250);
     buttonShake(scene.buttonGold, 300);
   });
+}
+
+function createPlane(texture, x, y, sX, sY, direction) {
+  return scene.getScreen()
+    .addSprite()
+    .setTexture(texture)
+    .setTranslation(x, y)
+    .setScale(sX, sY)
+    .setType('aura')
+    .setHAlign(direction)
+    .setVAlign('bottom');
+}
+
+function showHidePlayer(flag) {
+  scene.player.setHidden(flag);
+  scene.close.setHidden(flag);
+  scene.left.setHidden(flag);
+  scene.right.setHidden(flag);
+  scene.random.setHidden(flag);
+  scene.randomActive.setHidden(flag);
+  scene.play.setHidden(flag);
+  scene.stop.setHidden(flag);
+  if(!flag) {
+    if(playing) {
+      scene.play.setHidden(true);
+      scene.stop.setHidden(false);
+    } else {
+      scene.play.setHidden(false);
+      scene.stop.setHidden(true);
+    }
+    if(random) {
+      scene.random.setHidden(true);
+      scene.randomActive.setHidden(false);
+    } else {
+      scene.random.setHidden(false);
+      scene.randomActive.setHidden(true);
+    }
+  }
 }
