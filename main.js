@@ -12,6 +12,7 @@ var sH = blipp.getScreenHeight() * 1.003;
 
 var playing= false;
 var soundDelay;
+var trackNumber = 0;
 var random = false;
 
 var speaker = {
@@ -103,12 +104,27 @@ scene.onCreate = function() {
   });
 
   scene.play.on('touchEnd', function() {
-    playSound(music.first[0][0], music.first[0][1]);
+    playSound(music.first[trackNumber][0], music.first[trackNumber][1]);
   });
 
   scene.stop.on('touchEnd', function() {
-    soundDelay.stop();
     stopSound();
+  });
+
+  scene.left.on('touchEnd', function() {
+    trackCounter('left');
+    if(playing) {
+      stopSound();
+      playSound(music.first[trackNumber][0], music.first[trackNumber][1]);
+    }
+  });
+
+  scene.right.on('touchEnd', function() {
+    trackCounter();
+    if(playing) {
+      stopSound();
+      playSound(music.first[trackNumber][0], music.first[trackNumber][1]);
+    }
   });
 
   scene.close.on('touchEnd', function() {
@@ -119,7 +135,7 @@ scene.onCreate = function() {
   });
 
   scene.buttonRed.on('touchEnd', function() {
-    showHidePlayer(false);
+    //showHidePlayer(false);
   });
 
   scene.buttonBlue.on('touchEnd', function() {
@@ -127,7 +143,7 @@ scene.onCreate = function() {
   });
 
   scene.buttonGold.on('touchEnd', function() {
-    showHidePlayer(false);
+    //showHidePlayer(false);
   });
 };
 
@@ -146,7 +162,6 @@ scene.onShow = function() {
 
 scene.on('trackLost', function () {
   showHideAll(true);
-  showHidePlayer(false);
 });
 
 scene.on('track', function () {
@@ -259,16 +274,40 @@ function playSound(name, duration) {
   playing = true;
   speaker.animation(5.5);
   delay2(duration, function() {
-    stopSound();
+    //stopSound();
+    trackCounter();
+    playSound(music.first[trackNumber][0], music.first[trackNumber][1]);
   });
 }
 
 function stopSound() {
+  if(typeof soundDelay == 'object') {
+    soundDelay.stop();
+  }
+
   scene.stop.setHidden(true);
   scene.play.setHidden(false);
   scene.stopSounds();
   playing = false;
   speaker.animationStop();
+}
+
+function trackCounter (direction) {
+  if(direction == 'left') {
+    trackNumber--;
+  } else {
+    trackNumber++;
+  }
+
+  var trackLength = music.first.length;
+
+  if(trackNumber >= (trackLength - 1)) {
+    trackNumber = 0;
+  }
+
+  if(trackNumber < 0) {
+    trackNumber = (trackLength - 1);
+  }
 }
 
 var music = {
