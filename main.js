@@ -104,6 +104,7 @@ scene.onCreate = function() {
   });
 
   scene.play.on('touchEnd', function() {
+    backgroundSound(true);
     playSound(music.first[trackNumber][0], music.first[trackNumber][1]);
   });
 
@@ -132,6 +133,7 @@ scene.onCreate = function() {
     scene.stopSounds();
     playing = false;
     speaker.animationStop();
+    backgroundSound();
   });
 
   scene.buttonRed.on('touchEnd', function() {
@@ -145,19 +147,19 @@ scene.onCreate = function() {
   scene.buttonGold.on('touchEnd', function() {
     //showHidePlayer(false);
   });
+
+  showHideAll(true);
+  showHidePlayer(true);
 };
 
 scene.onShow = function() {
-  tranlateButtonX(scene.buttonSilver, 0, 100, 300);
-  tranlateButtonX(scene.buttonRed, 0, 300, 300);
-  tranlateButtonX(scene.buttonBlue, 0, 500, 300);
-  tranlateButtonX(scene.buttonGold, 0, 700, 300);
-  shakeAllButtons(800);
-  scene.playSound('backgroundSound.mp3', true, 'backgroundSound', 0.3, 0.3);
-  showHidePlayer(true);
-  speaker.animation(5.2);
+  fadeInAll(2000);
+  delay(2000, function() {
+    flyButtons();
+    shakeAllButtons(800);
+    backgroundSound();
+  });
   //scene.buttonSilver.playVideo('backgroundSound.mp3', 'backgroundSound.mp3', false, false, false);
-
 }
 
 scene.on('trackLost', function () {
@@ -181,6 +183,19 @@ function showHideAll(flag) {
   scene.buttonSilver.setHidden(flag);
 }
 
+function fadeInAll(duration) {
+  scene.speakerOut.fadeIn(duration);
+  scene.speakerIn.fadeIn(duration);
+  scene.year2017.fadeIn(duration);
+  scene.drops1.fadeIn(duration);
+  scene.drops2.fadeIn(duration);
+  scene.drops3.fadeIn(duration);
+  scene.buttonRed.fadeIn(duration);
+  scene.buttonBlue.fadeIn(duration);
+  scene.buttonGold.fadeIn(duration);
+  scene.buttonSilver.fadeIn(duration);
+}
+
 function tranlateButtonX(button, x, delay, duration, collBack) {
   button.animate()
     .translationX(x)
@@ -195,6 +210,13 @@ function tranlateButtonY(button, y, delay, duration, collBack) {
     .delay(delay)
     .duration(duration)
     .onEnd = collBack;
+}
+
+function flyButtons() {
+  tranlateButtonX(scene.buttonSilver, 0, 100, 300);
+  tranlateButtonX(scene.buttonRed, 0, 300, 300);
+  tranlateButtonX(scene.buttonBlue, 0, 500, 300);
+  tranlateButtonX(scene.buttonGold, 0, 700, 300);
 }
 
 function buttonShake(button, delayTime) {
@@ -223,9 +245,9 @@ function delay2(delay, onEnd){
 
 function shakeAllButtons(delayTime) {
   delay(delayTime, function() {
-    buttonShake(scene.buttonRed, 200);
-    buttonShake(scene.buttonBlue, 250);
-    buttonShake(scene.buttonGold, 300);
+    buttonShake(scene.buttonRed, 400);
+    buttonShake(scene.buttonBlue, 450);
+    buttonShake(scene.buttonGold, 500);
   });
 }
 
@@ -272,7 +294,7 @@ function playSound(name, duration) {
   scene.stop.setHidden(false);
   scene.playSound(name, false);
   playing = true;
-  speaker.animation(5.5);
+  speaker.animation(5.4);
   delay2(duration, function() {
     //stopSound();
     trackCounter();
@@ -290,6 +312,16 @@ function stopSound() {
   scene.stopSounds();
   playing = false;
   speaker.animationStop();
+}
+
+function backgroundSound(stop) {
+  if(stop) {
+    scene.stopSound('backgroundSound.mp3');
+    speaker.animationStop();
+  } else {
+    scene.playSound('backgroundSound.mp3', true, 'backgroundSound', 0.3, 0.3);
+    speaker.animation(5.2);
+  }
 }
 
 function trackCounter (direction) {
