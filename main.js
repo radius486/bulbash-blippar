@@ -10,9 +10,8 @@ var mH = blipp.getMarker().getHeight();
 var sW = blipp.getScreenWidth() * 1.003;
 var sH = blipp.getScreenHeight() * 1.003;
 
-var speakerAnim;
-var speakerAnimPlay = false;
 var playing= false;
+var soundDelay;
 var random = false;
 
 var speaker = {
@@ -104,15 +103,12 @@ scene.onCreate = function() {
   });
 
   scene.play.on('touchEnd', function() {
-    playSound('swing.mp3', 1000);
+    playSound(music.first[0][0], music.first[0][1]);
   });
 
   scene.stop.on('touchEnd', function() {
-    this.setHidden(true);
-    scene.play.setHidden(false);
-    scene.stopSounds();
-    playing = false;
-    speaker.animationStop();
+    soundDelay.stop();
+    stopSound();
   });
 
   scene.close.on('touchEnd', function() {
@@ -142,7 +138,6 @@ scene.onShow = function() {
   tranlateButtonX(scene.buttonGold, 0, 700, 300);
   shakeAllButtons(800);
   scene.playSound('backgroundSound.mp3', true, 'backgroundSound', 0.3, 0.3);
-  playing = true;
   showHidePlayer(true);
   speaker.animation(5.2);
   //scene.buttonSilver.playVideo('backgroundSound.mp3', 'backgroundSound.mp3', false, false, false);
@@ -206,6 +201,11 @@ function delay(delay, onEnd){
   return scene.animate().delay(delay).onEnd = onEnd;
 }
 
+function delay2(delay, onEnd){
+  soundDelay = scene.animate();
+  soundDelay.duration(delay).onEnd = onEnd;
+}
+
 function shakeAllButtons(delayTime) {
   delay(delayTime, function() {
     buttonShake(scene.buttonRed, 200);
@@ -258,11 +258,72 @@ function playSound(name, duration) {
   scene.playSound(name, false);
   playing = true;
   speaker.animation(5.5);
-  delay(duration, function() {
-    scene.stop.setHidden(true);
-    scene.play.setHidden(false);
-    scene.stopSounds();
-    playing = false;
-    speaker.animationStop();
+  delay2(duration, function() {
+    stopSound();
   });
 }
+
+function stopSound() {
+  scene.stop.setHidden(true);
+  scene.play.setHidden(false);
+  scene.stopSounds();
+  playing = false;
+  speaker.animationStop();
+}
+
+var music = {
+  first: [
+    ['1_1_52.mp3', 28000],
+    ['1_2_76.mp3', 41000],
+    ['1_3_95.mp3', 51000],
+    ['1_4_95.mp3', 43000],
+    ['1_5_79.mp3', 29000],
+    ['1_6_53.mp3', 21000],
+    ['1_7_40.mp3', 21000],
+    ['1_8_83.mp3', 45000],
+    ['1_9_45.mp3', 24000],
+    ['1_10_48.mp3', 26000],
+    ['1_11_53.mp3', 29000],
+    ['1_12_51.mp3', 27000],
+    ['1_13_63.mp3', 33000],
+    ['1_14_32.mp3', 17000],
+    ['1_15_67.mp3', 35000],
+    ['1_17_85.mp3', 45000],
+    ['1_18_60.mp3', 33000],
+    ['1_19_60.mp3', 32000],
+    ['1_20_49.mp3', 26000],
+    ['1_21_45.mp3', 24000],
+    ['1_22_48.mp3', 26000],
+    ['1_23_41.mp3', 22000],
+    ['1_24_41.mp3', 22000],
+    ['1_25_56.mp3', 30000],
+    ['1_27_66.mp3', 35000],
+    ['1_28_81.mp3', 43000],
+    ['1_29_59.mp3', 32000],
+    ['1_30_42.mp3', 22000],
+    ['1_31_62.mp3', 34000],
+    ['1_32_57.mp3', 57000],
+    ['1_33_30.mp3', 30000],
+    ['2_1_102.mp3', 55000],
+    ['2_2_76.mp3', 41000],
+    ['2_3_35.mp3', 19000],
+    ['2_4_42.mp3', 22000],
+    ['2_5_22.mp3', 12000],
+    ['2_6_41.mp3', 22000],
+    ['2_7_18.mp3', 9000],
+    ['2_8_19.mp3', 10000],
+    ['2_9_20.mp3', 10000],
+    ['2_10_24.mp3', 12000],
+    ['2_11_19.mp3', 10000],
+    ['2_12_80.mp3', 43000],
+    ['2_13_82.mp3', 44000],
+    ['3_1_84.mp3', 44000],
+    ['3_2_76.mp3', 41000],
+    ['3_3_72.mp3', 39000],
+    ['3_4_130.mp3',71000]
+  ],
+  second: [],
+  third: []
+}
+
+
