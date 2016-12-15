@@ -14,6 +14,7 @@ var playing= false;
 var soundDelay;
 var trackNumber = 0;
 var random = false;
+var randomList =[];
 
 var speaker = {
   anim: undefined,
@@ -95,6 +96,7 @@ scene.onCreate = function() {
     this.setHidden(true);
     scene.randomActive.setHidden(false);
     random = true;
+    randomList = generateRandomList(music.first);
   });
 
   scene.randomActive.on('touchEnd', function() {
@@ -105,7 +107,11 @@ scene.onCreate = function() {
 
   scene.play.on('touchEnd', function() {
     backgroundSound(true);
-    playSound(music.first[trackNumber][0], music.first[trackNumber][1]);
+    if(random) {
+      playSound(randomList[trackNumber][0], randomList[trackNumber][1]);
+    } else {
+      playSound(music.first[trackNumber][0], music.first[trackNumber][1]);
+    }
   });
 
   scene.stop.on('touchEnd', function() {
@@ -116,7 +122,11 @@ scene.onCreate = function() {
     trackCounter('left');
     if(playing) {
       stopSound();
-      playSound(music.first[trackNumber][0], music.first[trackNumber][1]);
+      if(random) {
+        playSound(randomList[trackNumber][0], randomList[trackNumber][1]);
+      } else {
+        playSound(music.first[trackNumber][0], music.first[trackNumber][1]);
+      }
     }
   });
 
@@ -124,7 +134,11 @@ scene.onCreate = function() {
     trackCounter();
     if(playing) {
       stopSound();
-      playSound(music.first[trackNumber][0], music.first[trackNumber][1]);
+      if(random) {
+        playSound(randomList[trackNumber][0], randomList[trackNumber][1]);
+      } else {
+        playSound(music.first[trackNumber][0], music.first[trackNumber][1]);
+      }
     }
   });
 
@@ -342,10 +356,41 @@ function trackCounter (direction) {
   }
 }
 
+function randomSound(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function generateRandomList() {
+  var trackListLength = music.first.length;
+  do {
+    var randomTrack = randomSound(0, trackListLength - 1);
+    for(var i = 0; i < randomList.length; i++) {
+      randomList.push(randomTrack);
+      console.log(randomList);
+      if(randomTrack != randomList[i]) break;
+    }
+  } while(randomList.length < trackListLength);
+}
+
+function generateRandomList(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  while (0 !== currentIndex) {
+
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
 var music = {
   first: [
     ['1_1_52.mp3', 28000],
-    ['1_2_76.mp3', 41000],
     ['1_3_95.mp3', 51000],
     ['1_4_95.mp3', 43000],
     ['1_5_79.mp3', 44000],
