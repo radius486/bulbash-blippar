@@ -65,13 +65,13 @@ var speaker = {
 
 // Scene creation
 scene.onCreate = function() {
-  scene.video1 = scene.addSprite().setScale(650, 650, 1).setTranslationZ(100);
-  scene.video1.setBlend('chromakey');
-  scene.video1.setChromakey([120, 0.8, 0.97, 72]);
+  scene.video1 = scene.addSprite().setBlend('add').setScale(650, 650, 1).setTranslationZ(100);
+  //scene.video1.setBlend('chromakey');
+  //scene.video1.setChromakey([120, 0.8, 0.97, 72]);
 
-  scene.video2 = scene.addSprite().setScale(1500, 1122, 1).setTranslation(0, -850 , 600);
-  scene.video2.setBlend('chromakey');
-  scene.video2.setChromakey([120, 0.8, 0.97, 72]);
+  scene.video2 = scene.addSprite().setBlend('add').setScale(1500, 1122, 1).setTranslation(0, -850 , 600);
+  //scene.video2.setBlend('chromakey');
+  //scene.video2.setChromakey([120, 0.8, 0.97, 72]);
 
 	scene.speakerOut = scene.getChild("speakerOut");
   scene.speakerIn = scene.getChild("speakerIn");
