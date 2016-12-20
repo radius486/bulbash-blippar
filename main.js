@@ -66,12 +66,7 @@ var speaker = {
 // Scene creation
 scene.onCreate = function() {
   scene.video1 = scene.addSprite().setBlend('add').setScale(650, 650, 1).setTranslationZ(100);
-  //scene.video1.setBlend('chromakey');
-  //scene.video1.setChromakey([120, 0.8, 0.97, 72]);
-
   scene.video2 = scene.addSprite().setBlend('add').setScale(1500, 1122, 1).setTranslation(0, -850 , 600);
-  //scene.video2.setBlend('chromakey');
-  //scene.video2.setChromakey([120, 0.8, 0.97, 72]);
 
 	scene.speakerOut = scene.getChild("speakerOut");
   scene.speakerIn = scene.getChild("speakerIn");
@@ -88,8 +83,6 @@ scene.onCreate = function() {
   scene.buttonBlue.setTranslationX(-2000);
   scene.buttonSilver.setTranslationX(-2000);
   scene.buttonGold.setTranslationX(2000);
-  //scene.prepareSound('backgroundSound.mp3', 'backgroundSound');
-
 
   scene.player = createPlane('player.png', -sW/2 + 5, -sH/2 + 150, sW - 10, sW/4, 'left');
   scene.close = createPlane('close.png', sW/2 - 40, -sH/2 + sW/4 + 60, sW/20, sW/20, 'right');
@@ -100,9 +93,7 @@ scene.onCreate = function() {
   scene.left = createPlane('left.png', -sW/2 + sW/4 - sW/7/2, -sH/2 + sW/4/2 - sW/8/2 + 150 , sW/8, sW/8, 'left');
   scene.right = createPlane('right.png', sW/2 - sW/4 + sW/7/2 , -sH/2 + sW/4/2 - sW/8/2 + 150 , sW/8, sW/8, 'right');
 
-
-  // scene.randomActive.setHidden(true);
-  // scene.stop.setHidden(true);
+  scene.legal = createPlane('legal.png', -sW/2 + 5, -sH/2 + 5, sW - 10, 140, 'left');
 
   scene.random.on('touchEnd', function() {
     this.setHidden(true);
