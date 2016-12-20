@@ -1,5 +1,7 @@
 var blipp = require('blippar').blipp;
 
+blipp.setAutoRequiredAssets(true);
+
 blipp.read("main.json");
 
 var scene = blipp.getScene("default");
@@ -198,21 +200,21 @@ scene.onShow = function() {
 }
 
 scene.on('trackLost', function () {
-  //showHideAll(true);
-  //scaleAll(-2000);
+  showHideAll(true);
+  //minimizeAll(-2800);
 });
 
 scene.on('track', function () {
-  //showHideAll(false);
+  showHideAll(false);
+  //minimizeAll(0);
 
-  //scaleAll(0);
 });
 
 function showHideAll(flag) {
-  scene.video1.setHidden(flag);
+  //scene.video1.setHidden(flag);
   scene.video2.setHidden(flag);
-  scene.speakerOut.setHidden(flag);
-  scene.speakerIn.setHidden(flag);
+  //scene.speakerOut.setHidden(flag);
+  //scene.speakerIn.setHidden(flag);
   scene.year2017.setHidden(flag);
   scene.drops1.setHidden(flag);
   scene.drops2.setHidden(flag);
@@ -223,14 +225,14 @@ function showHideAll(flag) {
   scene.buttonSilver.setHidden(flag);
 }
 
-function scaleAll(translate) {
+function minimizeAll(translate) {
   scene.speakerOut.setTranslationZ(translate);
   scene.speakerIn.setTranslationZ(translate);
   scene.year2017.setTranslationZ(translate);
   scene.drops1.setTranslationZ(translate);
   scene.drops2.setTranslationZ(translate);
   scene.drops3.setTranslationZ(translate);
-  scene.buttonRedsetTranslationZ(translate);
+  scene.buttonRed.setTranslationZ(translate);
   scene.buttonBlue.setTranslationZ(translate);
   scene.buttonGold.setTranslationZ(translate);
   scene.buttonSilver.setTranslationZ(translate);
@@ -349,7 +351,7 @@ function playSound(name, duration) {
   scene.stop.setHidden(false);
   scene.playSound(name, false);
   playing = true;
-  speaker.animation(5.4);
+  speaker.animation(5.3);
   delay2(duration, function() {
     //stopSound();
     trackCounter();
@@ -372,10 +374,10 @@ function stopSound() {
 function backgroundSound(stop) {
   if(stop) {
     scene.stopSound('backgroundSound.mp3');
-    speaker.animationStop();
+    //speaker.animationStop();
   } else {
     scene.playSound('backgroundSound.mp3', true, 'backgroundSound', 0.3, 0.3);
-    //speaker.animation(5.1);
+    //speaker.animation(5.2);
   }
 }
 
