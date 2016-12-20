@@ -66,7 +66,7 @@ var speaker = {
 // Scene creation
 scene.onCreate = function() {
   scene.video1 = scene.addSprite().setBlend('add').setScale(650, 650, 1).setTranslationZ(100);
-  scene.video2 = scene.addSprite().setBlend('add').setScale(1500, 1122, 1).setTranslation(0, -850 , 600);
+  scene.video2 = scene.addSprite().setBlend('add').setScale(1500, 1122, 1).setTranslation(-30, -850 , 600);
 
 	scene.speakerOut = scene.getChild("speakerOut");
   scene.speakerIn = scene.getChild("speakerIn");
@@ -192,21 +192,31 @@ scene.onShow = function() {
 
 scene.on('trackLost', function () {
   showHideAll(true);
+  scene.speakerOut.setTranslationY(300);
+  scene.speakerIn.setTranslationY(300);
+  scene.video1.setTranslationY(300);
+  scene.year2017.setTranslationY(-700).setScale(5, 5, 5);
+  scene.video2.setScale(700, 600, 1).setTranslation(-30, -300 , 300);
   //minimizeAll(-2800);
 });
 
 scene.on('track', function () {
   showHideAll(false);
+  scene.speakerOut.setTranslationY(0);
+  scene.speakerIn.setTranslationY(0);
+  scene.video1.setTranslationY(0);
+  scene.year2017.setTranslationY(-1650).setScale(10, 10, 10);
+  scene.video2.setScale(1500, 1122, 1).setTranslation(-30, -850 , 600);
   //minimizeAll(0);
 
 });
 
 function showHideAll(flag) {
   //scene.video1.setHidden(flag);
-  scene.video2.setHidden(flag);
+  //scene.video2.setHidden(flag);
   //scene.speakerOut.setHidden(flag);
   //scene.speakerIn.setHidden(flag);
-  scene.year2017.setHidden(flag);
+  //scene.year2017.setHidden(flag);
   scene.drops1.setHidden(flag);
   scene.drops2.setHidden(flag);
   scene.drops3.setHidden(flag);
