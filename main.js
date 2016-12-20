@@ -4,6 +4,8 @@ blipp.read("main.json");
 
 var scene = blipp.getScene("default");
 
+scene.addRequiredAssets(['Comp_rounds_2_1.mp4', 'Comp 4.mp4']);
+
 // Global variables
 var mW = blipp.getMarker().getWidth();
 var mH = blipp.getMarker().getHeight();
@@ -61,6 +63,14 @@ var speaker = {
 
 // Scene creation
 scene.onCreate = function() {
+  scene.video1 = scene.addSprite().setScale(650, 650, 1).setTranslationZ(100);
+  scene.video1.setBlend('chromakey');
+  scene.video1.setChromakey([120, 0.8, 0.97, 72]);
+
+  scene.video2 = scene.addSprite().setScale(1500, 1122, 1).setTranslation(0, -850 , 600);
+  scene.video2.setBlend('chromakey');
+  scene.video2.setChromakey([120, 0.8, 0.97, 72]);
+
 	scene.speakerOut = scene.getChild("speakerOut");
   scene.speakerIn = scene.getChild("speakerIn");
   scene.year2017 = scene.getChild("year2017");
@@ -162,29 +172,45 @@ scene.onCreate = function() {
     //showHidePlayer(false);
   });
 
-  showHideAll(true);
+  //showHideAll(true);
   showHidePlayer(true);
 };
 
 scene.onShow = function() {
+  scene.video1.playVideo('Comp_rounds_2_1.mp4', '', false, false, false);
+  scene.video1.on('videoTextureEnd', function () {
+    this.fadeOut();
+    this.fadeIn().playVideo('Comp_rounds_2_1.mp4', '', false, false, false);
+  });
+
+  scene.video2.playVideo('Comp 4.mp4', '', false, false, false);
+  scene.video2.on('videoTextureEnd', function () {
+    this.fadeOut();
+    this.fadeIn().playVideo('Comp 4.mp4', '', false, false, false);
+  });
   fadeInAll(2000);
   delay(2000, function() {
     flyButtons();
-    shakeAllButtons(800);
+    //shakeAllButtons(800);
     backgroundSound();
   });
   //scene.buttonSilver.playVideo('backgroundSound.mp3', 'backgroundSound.mp3', false, false, false);
 }
 
 scene.on('trackLost', function () {
-  showHideAll(true);
+  //showHideAll(true);
+  //scaleAll(-2000);
 });
 
 scene.on('track', function () {
-  showHideAll(false);
+  //showHideAll(false);
+
+  //scaleAll(0);
 });
 
 function showHideAll(flag) {
+  scene.video1.setHidden(flag);
+  scene.video2.setHidden(flag);
   scene.speakerOut.setHidden(flag);
   scene.speakerIn.setHidden(flag);
   scene.year2017.setHidden(flag);
@@ -197,7 +223,22 @@ function showHideAll(flag) {
   scene.buttonSilver.setHidden(flag);
 }
 
+function scaleAll(translate) {
+  scene.speakerOut.setTranslationZ(translate);
+  scene.speakerIn.setTranslationZ(translate);
+  scene.year2017.setTranslationZ(translate);
+  scene.drops1.setTranslationZ(translate);
+  scene.drops2.setTranslationZ(translate);
+  scene.drops3.setTranslationZ(translate);
+  scene.buttonRedsetTranslationZ(translate);
+  scene.buttonBlue.setTranslationZ(translate);
+  scene.buttonGold.setTranslationZ(translate);
+  scene.buttonSilver.setTranslationZ(translate);
+}
+
 function fadeInAll(duration) {
+  scene.video1.fadeIn(duration);
+  scene.video2.fadeIn(duration);
   scene.speakerOut.fadeIn(duration);
   scene.speakerIn.fadeIn(duration);
   scene.year2017.fadeIn(duration);
@@ -334,7 +375,7 @@ function backgroundSound(stop) {
     speaker.animationStop();
   } else {
     scene.playSound('backgroundSound.mp3', true, 'backgroundSound', 0.3, 0.3);
-    speaker.animation(5.2);
+    //speaker.animation(5.1);
   }
 }
 
