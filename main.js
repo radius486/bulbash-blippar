@@ -106,6 +106,8 @@ scene.onCreate = function() {
 
   scene.legal = createPlane('legal.png', -sW/2 + 5, -sH/2 + 5, sW - 10, 140, 'left');
 
+  scene.bottle = scene.addSprite().setTexture('Bulbash_LE_blue_WEB.png').setScale(mW * 2, mW * 4, 1).setTranslation(-30, 280, -100).setHidden(true);
+
   scene.random.on('touchEnd', function() {
     this.setHidden(true);
     scene.randomActive.setHidden(false);
@@ -209,6 +211,7 @@ scene.on('trackLost', function () {
     speaker.animation(3.65);
   }
 
+  scene.bottle.setHidden(false);
   scene.speakerOut.setTranslationY(420).setScale(3.5, 3.5, 2);
   scene.speakerIn.setTranslationY(420).setScale(3.5, 3.5, 2);
   scene.video1.setTranslationY(400).setScale(470, 470, 1);
@@ -226,6 +229,7 @@ scene.on('track', function () {
     speaker.animation(5.3);
   }
 
+  scene.bottle.setHidden(true);
   scene.speakerOut.setTranslationY(0).setScale(5, 5, 2);
   scene.speakerIn.setTranslationY(0).setScale(5, 5, 2);
   scene.video1.setTranslationY(0).setScale(650, 650, 1);
@@ -236,8 +240,8 @@ scene.on('track', function () {
 });
 
 function showHideAll(flag) {
-  //scene.video1.setHidden(flag);
-  //scene.video2.setHidden(flag);
+  scene.video1.setHidden(flag);
+  scene.video2.setHidden(flag);
   //scene.speakerOut.setHidden(flag);
   //scene.speakerIn.setHidden(flag);
   //scene.year2017.setHidden(flag);
