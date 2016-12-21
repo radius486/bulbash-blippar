@@ -100,9 +100,9 @@ scene.onCreate = function() {
   scene.left = createPlane('left.png', -sW/2 + sW/4 - sW/7/2, -sH/2 + sW/4/2 - sW/8/2 + 150 , sW/8, sW/8, 'left');
   scene.right = createPlane('right.png', sW/2 - sW/4 + sW/7/2 , -sH/2 + sW/4/2 - sW/8/2 + 150 , sW/8, sW/8, 'right');
 
-  scene.category1 = createPlane('category.png', -sW/2 + 50, -sH/2 + sW/4 + 155, sW - 100, 120, 'left');
-  scene.category2 = createPlane('category.png', -sW/2 + 50, -sH/2 + sW/4 + 280, sW - 100, 120, 'left');
-  scene.category3 = createPlane('category.png', -sW/2 + 50, -sH/2 + sW/4 + 405, sW - 100, 120, 'left');
+  scene.category1 = createPlane('category.png', -sW/2 + 5, -sH/2 + 150, sW - 10, 120, 'left');
+  scene.category2 = createPlane('category.png', -sW/2 + 5, -sH/2 + 275, sW - 10, 120, 'left');
+  scene.category3 = createPlane('category.png', -sW/2 + 5, -sH/2 + 400, sW - 10, 120, 'left');
 
   scene.legal = createPlane('legal.png', -sW/2 + 5, -sH/2 + 5, sW - 10, 140, 'left');
 
@@ -216,7 +216,6 @@ scene.on('trackLost', function () {
   scene.video2.setScale(700, 600, 1).setTranslation(-30, -300 , 300);
 
   buttonsOnLost();
-
 });
 
 scene.on('track', function () {
@@ -405,7 +404,7 @@ function backgroundSound(stop) {
     scene.stopSound('backgroundSound.mp3');
     //speaker.animationStop();
   } else {
-    scene.playSound('backgroundSound.mp3', true, 'backgroundSound', 0.3, 0.3);
+    //scene.playSound('backgroundSound.mp3', true, 'backgroundSound', 0.3, 0.3);
     //speaker.animation(5.2);
   }
 }
@@ -462,9 +461,9 @@ function generateRandomList(array) {
 
 function buttonsOnLost() {
   if (!startAnimation) {
-    scene.buttonRed.setTranslation(-360, -510, 0).setScale(4, 4, 4).setRotationZ(26);
-    scene.buttonBlue.setTranslation(300, -450, 0).setScale(4, 4, 4).setRotationZ(-26);
-    scene.buttonGold.setTranslation(-350, -450, 0).setScale(4, 4, 4).setRotationZ(26);
+    scene.buttonRed.setTranslation(-450, -700, 0).setScale(5, 5, 5).setRotationZ(24);
+    scene.buttonBlue.setTranslation(370, -645, 100).setScale(5, 5, 5).setRotationZ(-32);
+    scene.buttonGold.setTranslation(-465, -695, -60).setScale(5.35, 5.35, 5.35).setRotationZ(27);
   }
 }
 
