@@ -68,6 +68,10 @@ var speaker = {
 
 // Scene creation
 scene.onCreate = function() {
+  blipp.uiVisible('blippShareButton', false);
+  blipp.uiVisible('photoShareButton', false);
+  blipp.uiVisible('favouriteButton', false);
+
   scene.video1 = scene.addSprite().setBlend('add').setScale(650, 650, 1).setTranslationZ(100);
   scene.video2 = scene.addSprite().setBlend('add').setScale(1500, 1122, 1).setTranslation(-30, -850 , 600);
 
