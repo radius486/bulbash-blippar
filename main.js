@@ -96,6 +96,10 @@ scene.onCreate = function() {
   scene.left = createPlane('left.png', -sW/2 + sW/4 - sW/7/2, -sH/2 + sW/4/2 - sW/8/2 + 150 , sW/8, sW/8, 'left');
   scene.right = createPlane('right.png', sW/2 - sW/4 + sW/7/2 , -sH/2 + sW/4/2 - sW/8/2 + 150 , sW/8, sW/8, 'right');
 
+  scene.category1 = createPlane('category.png', -sW/2 + 50, -sH/2 + sW/4 + 155, sW - 100, 120, 'left');
+  scene.category2 = createPlane('category.png', -sW/2 + 50, -sH/2 + sW/4 + 280, sW - 100, 120, 'left');
+  scene.category3 = createPlane('category.png', -sW/2 + 50, -sH/2 + sW/4 + 405, sW - 100, 120, 'left');
+
   scene.legal = createPlane('legal.png', -sW/2 + 5, -sH/2 + 5, sW - 10, 140, 'left');
 
   scene.random.on('touchEnd', function() {
@@ -339,6 +343,11 @@ function showHidePlayer(flag) {
   scene.randomActive.setHidden(flag);
   scene.play.setHidden(flag);
   scene.stop.setHidden(flag);
+
+  scene.category1.setHidden(flag);
+  scene.category2.setHidden(flag);
+  scene.category3.setHidden(flag);
+
   if(!flag) {
     if(playing) {
       scene.play.setHidden(true);
