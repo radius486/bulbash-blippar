@@ -13,6 +13,7 @@ var mW = blipp.getMarker().getWidth();
 var mH = blipp.getMarker().getHeight();
 var sW = blipp.getScreenWidth() * 1.003;
 var sH = blipp.getScreenHeight() * 1.003;
+var trackLost = false;
 
 var playing= false;
 var soundDelay;
@@ -40,13 +41,9 @@ var speaker = {
     this.anim = scene.speakerIn.animate();
     this.anim.loop()
       .scale(amplitude, amplitude, 2)
-      .translationZ(45)
       .duration(200)
       .onEnd(
-        scene.speakerIn.animate()
-          .scale(5, 5, 2)
-          .translationZ(50)
-          .duration(200)
+        trackLost ? scene.speakerIn.animate().scale(3.5, 3.5, 2).duration(200) : scene.speakerIn.animate().scale(5, 5, 2).duration(200)
       );
     this.animPlay = true;
     this.currentAmplitude = amplitude;
@@ -59,7 +56,12 @@ var speaker = {
 
   animationReset: function() {
     this.anim.stop();
-    scene.speakerIn.setScale(5, 5, 2);
+    if(trackLost) {
+      scene.speakerIn.setScale(3.5, 3.5, 2);
+    } else {
+      scene.speakerIn.setScale(5, 5, 2);
+    }
+
   }
 }
 
@@ -191,20 +193,28 @@ scene.onShow = function() {
 }
 
 scene.on('trackLost', function () {
+  trackLost = true;
   showHideAll(true);
-  scene.speakerOut.setTranslationY(300);
-  scene.speakerIn.setTranslationY(300);
-  scene.video1.setTranslationY(300);
+  if(playing) {
+    speaker.animation(3.65);
+  }
+  scene.speakerOut.setTranslationY(420).setScale(3.5, 3.5, 2);
+  scene.speakerIn.setTranslationY(420).setScale(3.5, 3.5, 2);
+  scene.video1.setTranslationY(400).setScale(470, 470, 1);
   scene.year2017.setTranslationY(-700).setScale(5, 5, 5);
   scene.video2.setScale(700, 600, 1).setTranslation(-30, -300 , 300);
   //minimizeAll(-2800);
 });
 
 scene.on('track', function () {
+  trackLost = false;
   showHideAll(false);
-  scene.speakerOut.setTranslationY(0);
-  scene.speakerIn.setTranslationY(0);
-  scene.video1.setTranslationY(0);
+  if(playing) {
+    speaker.animation(5.3);
+  }
+  scene.speakerOut.setTranslationY(0).setScale(5, 5, 2);
+  scene.speakerIn.setTranslationY(0).setScale(5, 5, 2);
+  scene.video1.setTranslationY(0).setScale(650, 650, 1);
   scene.year2017.setTranslationY(-1650).setScale(10, 10, 10);
   scene.video2.setScale(1500, 1122, 1).setTranslation(-30, -850 , 600);
   //minimizeAll(0);
@@ -352,7 +362,12 @@ function playSound(name, duration) {
   scene.stop.setHidden(false);
   scene.playSound(name, false);
   playing = true;
-  speaker.animation(5.3);
+  if(trackLost) {
+    speaker.animation(3.65);
+  } else {
+    speaker.animation(5.3);
+  }
+
   delay2(duration, function() {
     //stopSound();
     trackCounter();
