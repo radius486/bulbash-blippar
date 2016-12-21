@@ -14,6 +14,7 @@ var mH = blipp.getMarker().getHeight();
 var sW = blipp.getScreenWidth() * 1.003;
 var sH = blipp.getScreenHeight() * 1.003;
 var trackLost = false;
+var startAnimation = true;
 
 var playing= false;
 var soundDelay;
@@ -195,30 +196,36 @@ scene.onShow = function() {
 scene.on('trackLost', function () {
   trackLost = true;
   showHideAll(true);
+
   if(playing) {
     speaker.animation(3.65);
   }
+
   scene.speakerOut.setTranslationY(420).setScale(3.5, 3.5, 2);
   scene.speakerIn.setTranslationY(420).setScale(3.5, 3.5, 2);
   scene.video1.setTranslationY(400).setScale(470, 470, 1);
   scene.year2017.setTranslationY(-700).setScale(5, 5, 5);
   scene.video2.setScale(700, 600, 1).setTranslation(-30, -300 , 300);
-  //minimizeAll(-2800);
+
+  buttonsOnLost();
+
 });
 
 scene.on('track', function () {
   trackLost = false;
   showHideAll(false);
+
   if(playing) {
     speaker.animation(5.3);
   }
+
   scene.speakerOut.setTranslationY(0).setScale(5, 5, 2);
   scene.speakerIn.setTranslationY(0).setScale(5, 5, 2);
   scene.video1.setTranslationY(0).setScale(650, 650, 1);
   scene.year2017.setTranslationY(-1650).setScale(10, 10, 10);
   scene.video2.setScale(1500, 1122, 1).setTranslation(-30, -850 , 600);
-  //minimizeAll(0);
 
+  buttonsOnTrack();
 });
 
 function showHideAll(flag) {
@@ -230,23 +237,10 @@ function showHideAll(flag) {
   scene.drops1.setHidden(flag);
   scene.drops2.setHidden(flag);
   scene.drops3.setHidden(flag);
-  scene.buttonRed.setHidden(flag);
-  scene.buttonBlue.setHidden(flag);
-  scene.buttonGold.setHidden(flag);
+  // scene.buttonRed.setHidden(flag);
+  // scene.buttonBlue.setHidden(flag);
+  // scene.buttonGold.setHidden(flag);
   scene.buttonSilver.setHidden(flag);
-}
-
-function minimizeAll(translate) {
-  scene.speakerOut.setTranslationZ(translate);
-  scene.speakerIn.setTranslationZ(translate);
-  scene.year2017.setTranslationZ(translate);
-  scene.drops1.setTranslationZ(translate);
-  scene.drops2.setTranslationZ(translate);
-  scene.drops3.setTranslationZ(translate);
-  scene.buttonRed.setTranslationZ(translate);
-  scene.buttonBlue.setTranslationZ(translate);
-  scene.buttonGold.setTranslationZ(translate);
-  scene.buttonSilver.setTranslationZ(translate);
 }
 
 function fadeInAll(duration) {
@@ -284,7 +278,13 @@ function flyButtons() {
   tranlateButtonX(scene.buttonSilver, 0, 100, 300);
   tranlateButtonX(scene.buttonRed, 0, 300, 300);
   tranlateButtonX(scene.buttonBlue, 0, 500, 300);
-  tranlateButtonX(scene.buttonGold, 0, 700, 300);
+  tranlateButtonX(scene.buttonGold, 0, 700, 300, function() {
+    startAnimation = false;
+
+    if (trackLost) {
+      buttonsOnLost();
+    }
+  });
 }
 
 function buttonShake(button, delayTime) {
@@ -445,6 +445,22 @@ function generateRandomList(array) {
   }
 
   return array;
+}
+
+function buttonsOnLost() {
+  if (!startAnimation) {
+    scene.buttonRed.setTranslation(-360, -510, 0).setScale(4, 4, 4).setRotationZ(26);
+    scene.buttonBlue.setTranslation(300, -450, 0).setScale(4, 4, 4).setRotationZ(-26);
+    scene.buttonGold.setTranslation(-350, -450, 0).setScale(4, 4, 4).setRotationZ(26);
+  }
+}
+
+function buttonsOnTrack() {
+  if (!startAnimation) {
+    scene.buttonRed.setTranslation(0, -1500, 0).setScale(10, 10, 10).setRotationZ(0);
+    scene.buttonBlue.setTranslation(0, -1500, 0).setScale(10, 10, 10).setRotationZ(0);
+    scene.buttonGold.setTranslation(0, -1500, 0).setScale(10, 10, 10).setRotationZ(0);
+  }
 }
 
 var music = {
