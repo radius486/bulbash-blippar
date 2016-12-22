@@ -102,9 +102,17 @@ scene.onCreate = function() {
   scene.left = createPlane('left.png', -sW/2 + sW/4 - sW/7/2, -sH/2 + sW/4/2 - sW/8/2 + 150 , sW/8, sW/8, 'left');
   scene.right = createPlane('right.png', sW/2 - sW/4 + sW/7/2 , -sH/2 + sW/4/2 - sW/8/2 + 150 , sW/8, sW/8, 'right');
 
-  scene.category1 = createPlane('category.png', -sW/2 + 5, -sH/2 + 400, sW - 10, 120, 'left');
-  scene.category2 = createPlane('category.png', -sW/2 + 5, -sH/2 + 275, sW - 10, 120, 'left');
-  scene.category3 = createPlane('category.png', -sW/2 + 5, -sH/2 + 150, sW - 10, 120, 'left');
+  scene.category1 = createPlane('rocker_1.png', -sW/2 + 5, -sH/2 + 400, sW - 10, 120, 'left');
+  scene.category2 = createPlane('rocker_2.png', -sW/2 + 5, -sH/2 + 275, sW - 10, 120, 'left');
+  scene.category3 = createPlane('rocker_3.png', -sW/2 + 5, -sH/2 + 150, sW - 10, 120, 'left');
+
+  scene.category4 = createPlane('elka_1.png', -sW/2 + 5, -sH/2 + 400, sW - 10, 120, 'left');
+  scene.category5 = createPlane('elka_2.png', -sW/2 + 5, -sH/2 + 275, sW - 10, 120, 'left');
+  scene.category6 = createPlane('elka_3.png', -sW/2 + 5, -sH/2 + 150, sW - 10, 120, 'left');
+
+  scene.category7 = createPlane('haligali_1.png', -sW/2 + 5, -sH/2 + 400, sW - 10, 120, 'left');
+  scene.category8 = createPlane('haligali_2.png', -sW/2 + 5, -sH/2 + 275, sW - 10, 120, 'left');
+  scene.category9 = createPlane('haligali_3.png', -sW/2 + 5, -sH/2 + 150, sW - 10, 120, 'left');
 
   scene.legal = createPlane('legal.png', -sW/2 + 5, -sH/2 + 5, sW - 10, 140, 'left');
 
@@ -125,19 +133,11 @@ scene.onCreate = function() {
   });
 
   scene.play.on('touchEnd', function() {
-    backgroundSound(true);
-    if(random) {
-      playSound(randomList[trackNumber][0], randomList[trackNumber][1]);
-    } else {
-      playSound(music[currentCategory][trackNumber][0], music[currentCategory][trackNumber][1]);
-    }
+    //startPlaying();
   });
 
   scene.stop.on('touchEnd', function() {
-    stopSound();
-    showHidePlayer(true);
-    hideCategories(false);
-    backgroundSound();
+    stopPlaying();
   });
 
   scene.left.on('touchEnd', function() {
@@ -165,53 +165,133 @@ scene.onCreate = function() {
   });
 
   scene.close.on('touchEnd', function() {
-    stopSound();
-    showHidePlayer(true);
-    hideCategories(false);
-    backgroundSound();
+    stopPlaying();
   });
 
   scene.buttonRed.on('touchEnd', function() {
+    if(currentSection == 'rocker') {
+      return;
+    }
+
+    if(playing) {
+      stopSound();
+      showHidePlayer(true);
+    }
+
     currentSection = 'rocker';
     hideCategories(false);
-    //showHidePlayer(false);
+    showSectionCategiries(currentSection, false);
   });
 
   scene.buttonBlue.on('touchEnd', function() {
-    //currentSection = 'standup';
-    //showHidePlayer(false);
+    if(currentSection == 'stendup') {
+      return;
+    }
+
+    if(playing) {
+      stopSound();
+      showHidePlayer(true);
+    }
+
+    currentSection = 'stendup';
+    hideCategories(false);
+    showSectionCategiries(currentSection, false);
   });
 
   scene.buttonGold.on('touchEnd', function() {
-    //currentSection = 'ohmen';
-    //showHidePlayer(false);
+    if(currentSection == 'ohmen') {
+      return;
+    }
+
+    if(playing) {
+      stopSound();
+      showHidePlayer(true);
+    }
+
+    currentSection = 'ohmen';
+    hideCategories(false);
+    showSectionCategiries(currentSection, false);
   });
 
   scene.category1.on('touchEnd', function() {
-    if(currentSection == 'rocker') {
-      currentCategory = 'first';
-    }
-
+    currentCategory = 'list1';
     hideCategories(true);
     showHidePlayer(false);
+    delay(500, function() {
+      startPlaying();
+    });
   });
 
   scene.category2.on('touchEnd', function() {
-    if(currentSection == 'rocker') {
-      currentCategory = 'second';
-    }
-
+    currentCategory = 'list2';
     hideCategories(true);
     showHidePlayer(false);
+    delay(500, function() {
+      startPlaying();
+    });
   });
 
   scene.category3.on('touchEnd', function() {
-    if(currentSection == 'rocker') {
-      currentCategory = 'third';
-    }
-
+    currentCategory = 'list3';
     hideCategories(true);
     showHidePlayer(false);
+    delay(500, function() {
+      startPlaying();
+    });
+  });
+
+  scene.category4.on('touchEnd', function() {
+    currentCategory = 'list4';
+    hideCategories(true);
+    showHidePlayer(false);
+    delay(500, function() {
+      startPlaying();
+    });
+  });
+
+  scene.category5.on('touchEnd', function() {
+    currentCategory = 'list5';
+    hideCategories(true);
+    showHidePlayer(false);
+    delay(500, function() {
+      startPlaying();
+    });
+  });
+
+  scene.category6.on('touchEnd', function() {
+    currentCategory = 'list6';
+    hideCategories(true);
+    showHidePlayer(false);
+    delay(500, function() {
+      startPlaying();
+    });
+  });
+
+  scene.category7.on('touchEnd', function() {
+    currentCategory = 'list7';
+    hideCategories(true);
+    showHidePlayer(false);
+    delay(500, function() {
+      startPlaying();
+    });
+  });
+
+  scene.category8.on('touchEnd', function() {
+    currentCategory = 'list8';
+    hideCategories(true);
+    showHidePlayer(false);
+    delay(500, function() {
+      startPlaying();
+    });
+  });
+
+  scene.category9.on('touchEnd', function() {
+    currentCategory = 'list9';
+    hideCategories(true);
+    showHidePlayer(false);
+    delay(500, function() {
+      startPlaying();
+    });
   });
 
   //showHideAll(true);
@@ -234,8 +314,6 @@ scene.onShow = function() {
   fadeInAll(2000);
   delay(2000, function() {
     flyButtons();
-    //shakeAllButtons(800);
-    backgroundSound();
   });
 }
 
@@ -358,14 +436,6 @@ function delay2(delay, onEnd){
   soundDelay.duration(delay).onEnd = onEnd;
 }
 
-function shakeAllButtons(delayTime) {
-  delay(delayTime, function() {
-    buttonShake(scene.buttonRed, 400);
-    buttonShake(scene.buttonBlue, 450);
-    buttonShake(scene.buttonGold, 500);
-  });
-}
-
 function createPlane(texture, x, y, sX, sY, direction) {
   return scene.getScreen()
     .addSprite()
@@ -381,6 +451,30 @@ function hideCategories(flag) {
   scene.category1.setHidden(flag);
   scene.category2.setHidden(flag);
   scene.category3.setHidden(flag);
+  scene.category4.setHidden(flag);
+  scene.category5.setHidden(flag);
+  scene.category6.setHidden(flag);
+  scene.category7.setHidden(flag);
+  scene.category8.setHidden(flag);
+  scene.category9.setHidden(flag);
+}
+
+function showSectionCategiries(section, flag) {
+  if(section == 'rocker') {
+    scene.category1.setHidden(flag);
+    scene.category2.setHidden(flag);
+    scene.category3.setHidden(flag);
+  }
+  if(section == 'standup') {
+    scene.category4.setHidden(flag);
+    scene.category5.setHidden(flag);
+    scene.category6.setHidden(flag);
+  }
+  if(section == 'ohmen') {
+    scene.category7.setHidden(flag);
+    scene.category8.setHidden(flag);
+    scene.category9.setHidden(flag);
+  }
 }
 
 function showHidePlayer(flag) {
@@ -470,12 +564,34 @@ function trackCounter (direction) {
     trackNumber = 0;
 
     if(!random) {
-      if(currentCategory == 'first') {
-        currentCategory = 'second';
-      } else if (currentCategory == 'second') {
-        currentCategory = 'third';
-      } else if (currentCategory == 'third') {
-        currentCategory = 'first';
+      switch(currentCategory) {
+        case 'list1':
+          currentCategory = 'list2';
+          break;
+        case 'list2':
+          currentCategory = 'list3';
+          break;
+        case 'list3':
+          currentCategory = 'list1';
+          break;
+        case 'list4':
+          currentCategory = 'list5';
+          break;
+        case 'list5':
+          currentCategory = 'list6';
+          break;
+        case 'list6':
+          currentCategory = 'list4';
+          break;
+        case 'list7':
+          currentCategory = 'list8';
+          break;
+        case 'list8':
+          currentCategory = 'list9';
+          break;
+        case 'list9':
+          currentCategory = 'list7';
+          break;
       }
     }
   }
@@ -485,12 +601,34 @@ function trackCounter (direction) {
     if(!random) {
       trackNumber = 0;
 
-      if(currentCategory == 'first') {
-        currentCategory = 'third';
-      } else if (currentCategory == 'second') {
-        currentCategory = 'first';
-      } else if (currentCategory == 'third') {
-        currentCategory = 'second';
+      switch(currentCategory) {
+        case 'list1':
+          currentCategory = 'list3';
+          break;
+        case 'list2':
+          currentCategory = 'list1';
+          break;
+        case 'list3':
+          currentCategory = 'list2';
+          break;
+        case 'list4':
+          currentCategory = 'list6';
+          break;
+        case 'list5':
+          currentCategory = 'list4';
+          break;
+        case 'list6':
+          currentCategory = 'list5';
+          break;
+        case 'list7':
+          currentCategory = 'list9';
+          break;
+        case 'list8':
+          currentCategory = 'list7';
+          break;
+        case 'list9':
+          currentCategory = 'list8';
+          break;
       }
     }
   }
@@ -532,8 +670,24 @@ function buttonsOnTrack() {
   }
 }
 
+function startPlaying() {
+  backgroundSound(true);
+  if(random) {
+    playSound(randomList[trackNumber][0], randomList[trackNumber][1]);
+  } else {
+    playSound(music[currentCategory][trackNumber][0], music[currentCategory][trackNumber][1]);
+  }
+}
+
+function stopPlaying() {
+  stopSound();
+  showHidePlayer(true);
+  hideCategories(false);
+  backgroundSound();
+}
+
 var music = {
-  'first': [
+  'list1': [
     ['1_1_52.mp3', 28000],
     ['1_3_95.mp3', 51000],
     ['1_4_95.mp3', 43000],
@@ -566,7 +720,7 @@ var music = {
     ['1_33_30.mp3', 30000]
   ],
 
-  'second': [
+  'list2': [
     ['2_1_102.mp3', 55000],
     ['2_2_76.mp3', 41000],
     ['2_3_35.mp3', 19000],
@@ -582,12 +736,54 @@ var music = {
     ['2_13_82.mp3', 44000]
   ],
 
-  'third': [
+  'list3': [
+    ['3_1_84.mp3', 44000],
+    ['3_2_76.mp3', 41000],
+    ['3_3_72.mp3', 39000],
+    ['3_4_130.mp3',71000]
+  ],
+
+  'list4': [
+    ['3_1_84.mp3', 44000],
+    ['3_2_76.mp3', 41000],
+    ['3_3_72.mp3', 39000],
+    ['3_4_130.mp3',71000]
+  ],
+
+  'list5': [
+    ['3_1_84.mp3', 44000],
+    ['3_2_76.mp3', 41000],
+    ['3_3_72.mp3', 39000],
+    ['3_4_130.mp3',71000]
+  ],
+
+  'list6': [
+    ['3_1_84.mp3', 44000],
+    ['3_2_76.mp3', 41000],
+    ['3_3_72.mp3', 39000],
+    ['3_4_130.mp3',71000]
+  ],
+
+  'list7': [
+    ['3_1_84.mp3', 44000],
+    ['3_2_76.mp3', 41000],
+    ['3_3_72.mp3', 39000],
+    ['3_4_130.mp3',71000]
+  ],
+
+  'list8': [
+    ['3_1_84.mp3', 44000],
+    ['3_2_76.mp3', 41000],
+    ['3_3_72.mp3', 39000],
+    ['3_4_130.mp3',71000]
+  ],
+
+  'list9': [
     ['3_1_84.mp3', 44000],
     ['3_2_76.mp3', 41000],
     ['3_3_72.mp3', 39000],
     ['3_4_130.mp3',71000]
   ]
-}
+};
 
 
