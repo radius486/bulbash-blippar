@@ -130,6 +130,7 @@ scene.onCreate = function() {
     this.setHidden(true);
     scene.random.setHidden(false);
     random = false;
+    randomList = [];
   });
 
   scene.play.on('touchEnd', function() {
@@ -179,12 +180,12 @@ scene.onCreate = function() {
     }
 
     currentSection = 'rocker';
-    hideCategories(false);
+    hideCategories(true);
     showSectionCategiries(currentSection, false);
   });
 
   scene.buttonBlue.on('touchEnd', function() {
-    if(currentSection == 'stendup') {
+    if(currentSection == 'standup') {
       return;
     }
 
@@ -193,8 +194,8 @@ scene.onCreate = function() {
       showHidePlayer(true);
     }
 
-    currentSection = 'stendup';
-    hideCategories(false);
+    currentSection = 'standup';
+    hideCategories(true);
     showSectionCategiries(currentSection, false);
   });
 
@@ -209,7 +210,7 @@ scene.onCreate = function() {
     }
 
     currentSection = 'ohmen';
-    hideCategories(false);
+    hideCategories(true);
     showSectionCategiries(currentSection, false);
   });
 
@@ -512,6 +513,7 @@ function playSound(name, duration) {
   scene.stop.setHidden(false);
   scene.playSound(name, false);
   playing = true;
+  console.log(name);
   if(trackLost) {
     speaker.animation(3.65);
   } else {
@@ -519,11 +521,14 @@ function playSound(name, duration) {
   }
 
   delay2(duration, function() {
-    //stopSound();
     trackCounter();
     speaker.animationStop();
     delay2(2000, function() {
-      playSound(music[currentCategory][trackNumber][0], music[currentCategory][trackNumber][1]);
+      if(random) {
+        playSound(randomList[trackNumber][0], randomList[trackNumber][1]);
+      } else {
+        playSound(music[currentCategory][trackNumber][0], music[currentCategory][trackNumber][1]);
+      }
     });
 
   });
@@ -560,7 +565,7 @@ function trackCounter (direction) {
 
   var trackLength = music[currentCategory].length;
 
-  if(trackNumber >= (trackLength - 1)) {
+  if(trackNumber > (trackLength - 1)) {
     trackNumber = 0;
 
     if(!random) {
@@ -673,6 +678,8 @@ function buttonsOnTrack() {
 function startPlaying() {
   backgroundSound(true);
   if(random) {
+    randomList = [];
+    randomList = generateRandomList(music[currentCategory].slice());
     playSound(randomList[trackNumber][0], randomList[trackNumber][1]);
   } else {
     playSound(music[currentCategory][trackNumber][0], music[currentCategory][trackNumber][1]);
@@ -682,7 +689,7 @@ function startPlaying() {
 function stopPlaying() {
   stopSound();
   showHidePlayer(true);
-  hideCategories(false);
+  showSectionCategiries(currentSection, false);
   backgroundSound();
 }
 
