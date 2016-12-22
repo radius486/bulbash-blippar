@@ -106,7 +106,7 @@ scene.onCreate = function() {
 
   scene.legal = createPlane('legal.png', -sW/2 + 5, -sH/2 + 5, sW - 10, 140, 'left');
 
-  scene.bottle = scene.addSprite().setTexture('Bulbash_LE_blue_WEB.png').setScale(mW * 2, mW * 4, 1).setTranslation(-30, 280, -100).setHidden(true);
+  scene.bottle = scene.addSprite().setTexture('Bulbash_LE_blue_WEB.png').setScale(mW * 1.7, mW * 3.4, 1).setTranslation(-30, 290, -100).setHidden(true);
 
   scene.random.on('touchEnd', function() {
     this.setHidden(true);
@@ -200,7 +200,6 @@ scene.onShow = function() {
     //shakeAllButtons(800);
     backgroundSound();
   });
-  //scene.buttonSilver.playVideo('backgroundSound.mp3', 'backgroundSound.mp3', false, false, false);
 }
 
 scene.on('trackLost', function () {
@@ -405,10 +404,10 @@ function stopSound() {
 
 function backgroundSound(stop) {
   if(stop) {
-    scene.stopSound('backgroundSound.mp3');
+    scene.stopSound('music.mp3');
     //speaker.animationStop();
   } else {
-    //scene.playSound('backgroundSound.mp3', true, 'backgroundSound', 0.3, 0.3);
+    //scene.playSound('music.mp3', true, 'backgroundSound', 0.3, 0.3);
     //speaker.animation(5.2);
   }
 }
