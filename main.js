@@ -105,6 +105,7 @@ scene.onCreate = function() {
   scene.category1 = createPlane('category.png', -sW/2 + 5, -sH/2 + 400, sW - 10, 120, 'left');
   scene.category2 = createPlane('category.png', -sW/2 + 5, -sH/2 + 275, sW - 10, 120, 'left');
   scene.category3 = createPlane('category.png', -sW/2 + 5, -sH/2 + 150, sW - 10, 120, 'left');
+  scsne.category1Text = text.setText('some string');
 
   scene.legal = createPlane('legal.png', -sW/2 + 5, -sH/2 + 5, sW - 10, 140, 'left');
 
@@ -178,12 +179,12 @@ scene.onCreate = function() {
   });
 
   scene.buttonBlue.on('touchEnd', function() {
-    currentSection = 'standup';
+    //currentSection = 'standup';
     //showHidePlayer(false);
   });
 
   scene.buttonGold.on('touchEnd', function() {
-    currentSection = 'ohmen';
+    //currentSection = 'ohmen';
     //showHidePlayer(false);
   });
 
@@ -452,7 +453,7 @@ function backgroundSound(stop) {
     scene.stopSound('music.mp3');
     //speaker.animationStop();
   } else {
-    //scene.playSound('music.mp3', true, 'backgroundSound', 0.3, 0.3);
+    scene.playSound('music.mp3', true, 'backgroundSound', 0.3, 0.3);
     //speaker.animation(5.2);
   }
 }
