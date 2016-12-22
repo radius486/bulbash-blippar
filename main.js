@@ -105,7 +105,6 @@ scene.onCreate = function() {
   scene.category1 = createPlane('category.png', -sW/2 + 5, -sH/2 + 400, sW - 10, 120, 'left');
   scene.category2 = createPlane('category.png', -sW/2 + 5, -sH/2 + 275, sW - 10, 120, 'left');
   scene.category3 = createPlane('category.png', -sW/2 + 5, -sH/2 + 150, sW - 10, 120, 'left');
-  scsne.category1Text = text.setText('some string');
 
   scene.legal = createPlane('legal.png', -sW/2 + 5, -sH/2 + 5, sW - 10, 140, 'left');
 
