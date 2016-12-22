@@ -468,10 +468,31 @@ function trackCounter (direction) {
 
   if(trackNumber >= (trackLength - 1)) {
     trackNumber = 0;
+
+    if(!random) {
+      if(currentCategory == 'first') {
+        currentCategory = 'second';
+      } else if (currentCategory == 'second') {
+        currentCategory = 'third';
+      } else if (currentCategory == 'third') {
+        currentCategory = 'first';
+      }
+    }
   }
 
   if(trackNumber < 0) {
     trackNumber = (trackLength - 1);
+    if(!random) {
+      trackNumber = 0;
+
+      if(currentCategory == 'first') {
+        currentCategory = 'third';
+      } else if (currentCategory == 'second') {
+        currentCategory = 'first';
+      } else if (currentCategory == 'third') {
+        currentCategory = 'second';
+      }
+    }
   }
 }
 
@@ -542,7 +563,10 @@ var music = {
     ['1_30_42.mp3', 22000],
     ['1_31_62.mp3', 34000],
     ['1_32_57.mp3', 57000],
-    ['1_33_30.mp3', 30000],
+    ['1_33_30.mp3', 30000]
+  ],
+
+  'second': [
     ['2_1_102.mp3', 55000],
     ['2_2_76.mp3', 41000],
     ['2_3_35.mp3', 19000],
@@ -555,14 +579,15 @@ var music = {
     ['2_10_24.mp3', 12000],
     ['2_11_19.mp3', 10000],
     ['2_12_80.mp3', 43000],
-    ['2_13_82.mp3', 44000],
+    ['2_13_82.mp3', 44000]
+  ],
+
+  'third': [
     ['3_1_84.mp3', 44000],
     ['3_2_76.mp3', 41000],
     ['3_3_72.mp3', 39000],
     ['3_4_130.mp3',71000]
-  ],
-  second: [],
-  third: []
+  ]
 }
 
 
