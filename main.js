@@ -19,6 +19,8 @@ var startAnimation = true;
 var playing= false;
 var soundDelay;
 var trackNumber = 0;
+var currentSection;
+var currentCategory;
 var random = false;
 var randomList =[];
 
@@ -100,9 +102,9 @@ scene.onCreate = function() {
   scene.left = createPlane('left.png', -sW/2 + sW/4 - sW/7/2, -sH/2 + sW/4/2 - sW/8/2 + 150 , sW/8, sW/8, 'left');
   scene.right = createPlane('right.png', sW/2 - sW/4 + sW/7/2 , -sH/2 + sW/4/2 - sW/8/2 + 150 , sW/8, sW/8, 'right');
 
-  scene.category1 = createPlane('category.png', -sW/2 + 5, -sH/2 + 150, sW - 10, 120, 'left');
+  scene.category1 = createPlane('category.png', -sW/2 + 5, -sH/2 + 400, sW - 10, 120, 'left');
   scene.category2 = createPlane('category.png', -sW/2 + 5, -sH/2 + 275, sW - 10, 120, 'left');
-  scene.category3 = createPlane('category.png', -sW/2 + 5, -sH/2 + 400, sW - 10, 120, 'left');
+  scene.category3 = createPlane('category.png', -sW/2 + 5, -sH/2 + 150, sW - 10, 120, 'left');
 
   scene.legal = createPlane('legal.png', -sW/2 + 5, -sH/2 + 5, sW - 10, 140, 'left');
 
@@ -112,7 +114,8 @@ scene.onCreate = function() {
     this.setHidden(true);
     scene.randomActive.setHidden(false);
     random = true;
-    randomList = generateRandomList(music.first);
+    randomList = [];
+    randomList = generateRandomList(music[currentCategory].slice());
   });
 
   scene.randomActive.on('touchEnd', function() {
@@ -126,12 +129,15 @@ scene.onCreate = function() {
     if(random) {
       playSound(randomList[trackNumber][0], randomList[trackNumber][1]);
     } else {
-      playSound(music.first[trackNumber][0], music.first[trackNumber][1]);
+      playSound(music[currentCategory][trackNumber][0], music[currentCategory][trackNumber][1]);
     }
   });
 
   scene.stop.on('touchEnd', function() {
     stopSound();
+    showHidePlayer(true);
+    hideCategories(false);
+    backgroundSound();
   });
 
   scene.left.on('touchEnd', function() {
@@ -141,7 +147,7 @@ scene.onCreate = function() {
       if(random) {
         playSound(randomList[trackNumber][0], randomList[trackNumber][1]);
       } else {
-        playSound(music.first[trackNumber][0], music.first[trackNumber][1]);
+        playSound(music[currentCategory][trackNumber][0], music[currentCategory][trackNumber][1]);
       }
     }
   });
@@ -153,33 +159,64 @@ scene.onCreate = function() {
       if(random) {
         playSound(randomList[trackNumber][0], randomList[trackNumber][1]);
       } else {
-        playSound(music.first[trackNumber][0], music.first[trackNumber][1]);
+        playSound(music[currentCategory][trackNumber][0], music[currentCategory][trackNumber][1]);
       }
     }
   });
 
   scene.close.on('touchEnd', function() {
+    stopSound();
     showHidePlayer(true);
-    scene.stopSounds();
-    playing = false;
-    speaker.animationStop();
+    hideCategories(false);
     backgroundSound();
   });
 
   scene.buttonRed.on('touchEnd', function() {
+    currentSection = 'rocker';
+    hideCategories(false);
     //showHidePlayer(false);
   });
 
   scene.buttonBlue.on('touchEnd', function() {
-    showHidePlayer(false);
+    currentSection = 'standup';
+    //showHidePlayer(false);
   });
 
   scene.buttonGold.on('touchEnd', function() {
+    currentSection = 'ohmen';
     //showHidePlayer(false);
+  });
+
+  scene.category1.on('touchEnd', function() {
+    if(currentSection == 'rocker') {
+      currentCategory = 'first';
+    }
+
+    hideCategories(true);
+    showHidePlayer(false);
+  });
+
+  scene.category2.on('touchEnd', function() {
+    if(currentSection == 'rocker') {
+      currentCategory = 'second';
+    }
+
+    hideCategories(true);
+    showHidePlayer(false);
+  });
+
+  scene.category3.on('touchEnd', function() {
+    if(currentSection == 'rocker') {
+      currentCategory = 'third';
+    }
+
+    hideCategories(true);
+    showHidePlayer(false);
   });
 
   //showHideAll(true);
   showHidePlayer(true);
+  hideCategories(true);
 };
 
 scene.onShow = function() {
@@ -340,6 +377,12 @@ function createPlane(texture, x, y, sX, sY, direction) {
     .setVAlign('bottom');
 }
 
+function hideCategories(flag) {
+  scene.category1.setHidden(flag);
+  scene.category2.setHidden(flag);
+  scene.category3.setHidden(flag);
+}
+
 function showHidePlayer(flag) {
   scene.player.setHidden(flag);
   scene.close.setHidden(flag);
@@ -349,10 +392,6 @@ function showHidePlayer(flag) {
   scene.randomActive.setHidden(flag);
   scene.play.setHidden(flag);
   scene.stop.setHidden(flag);
-
-  scene.category1.setHidden(flag);
-  scene.category2.setHidden(flag);
-  scene.category3.setHidden(flag);
 
   if(!flag) {
     if(playing) {
@@ -369,6 +408,8 @@ function showHidePlayer(flag) {
       scene.random.setHidden(false);
       scene.randomActive.setHidden(true);
     }
+  } else {
+    trackNumber = 0;
   }
 }
 
@@ -386,7 +427,7 @@ function playSound(name, duration) {
   delay2(duration, function() {
     //stopSound();
     trackCounter();
-    playSound(music.first[trackNumber][0], music.first[trackNumber][1]);
+    playSound(music[currentCategory][trackNumber][0], music[currentCategory][trackNumber][1]);
   });
 }
 
@@ -419,7 +460,7 @@ function trackCounter (direction) {
     trackNumber++;
   }
 
-  var trackLength = music.first.length;
+  var trackLength = music[currentCategory].length;
 
   if(trackNumber >= (trackLength - 1)) {
     trackNumber = 0;
@@ -432,18 +473,6 @@ function trackCounter (direction) {
 
 function randomSound(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function generateRandomList() {
-  var trackListLength = music.first.length;
-  do {
-    var randomTrack = randomSound(0, trackListLength - 1);
-    for(var i = 0; i < randomList.length; i++) {
-      randomList.push(randomTrack);
-      console.log(randomList);
-      if(randomTrack != randomList[i]) break;
-    }
-  } while(randomList.length < trackListLength);
 }
 
 function generateRandomList(array) {
@@ -479,7 +508,7 @@ function buttonsOnTrack() {
 }
 
 var music = {
-  first: [
+  'first': [
     ['1_1_52.mp3', 28000],
     ['1_3_95.mp3', 51000],
     ['1_4_95.mp3', 43000],
