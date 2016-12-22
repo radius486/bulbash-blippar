@@ -427,7 +427,11 @@ function playSound(name, duration) {
   delay2(duration, function() {
     //stopSound();
     trackCounter();
-    playSound(music[currentCategory][trackNumber][0], music[currentCategory][trackNumber][1]);
+    speaker.animationStop();
+    delay2(2000, function() {
+      playSound(music[currentCategory][trackNumber][0], music[currentCategory][trackNumber][1]);
+    });
+
   });
 }
 
