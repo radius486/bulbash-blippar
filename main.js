@@ -66,7 +66,7 @@ var speaker = {
     }
 
   }
-}
+};
 
 // Scene creation
 scene.onCreate = function() {
@@ -75,9 +75,9 @@ scene.onCreate = function() {
   blipp.uiVisible('favouriteButton', false);
 
   scene.video1 = scene.addSprite().setBlend('add').setScale(650, 650, 1).setTranslationZ(100);
-  scene.video2 = scene.addSprite().setBlend('add').setScale(1500, 1122, 1).setTranslation(-30, -850 , 600);
+  scene.video2 = scene.addSprite().setBlend('add').setScale(1700, 1322, 1).setTranslation(-70, -850 , 600);
 
-	scene.speakerOut = scene.getChild("speakerOut");
+  scene.speakerOut = scene.getChild("speakerOut");
   scene.speakerIn = scene.getChild("speakerIn");
   scene.year2017 = scene.getChild("year2017");
   scene.drops1 = scene.getChild("drops1");
@@ -316,7 +316,8 @@ scene.onShow = function() {
   delay(2000, function() {
     flyButtons();
   });
-}
+  backgroundSound();
+};
 
 scene.on('trackLost', function () {
   trackLost = true;
@@ -331,7 +332,7 @@ scene.on('trackLost', function () {
   scene.speakerIn.setTranslationY(420).setScale(3.5, 3.5, 2);
   scene.video1.setTranslationY(400).setScale(470, 470, 1);
   scene.year2017.setTranslationY(-700).setScale(5, 5, 5);
-  scene.video2.setScale(700, 600, 1).setTranslation(-30, -300 , 300);
+  scene.video2.setScale(700, 600, 1).setTranslation(-70, -300 , 300);
 
   buttonsOnLost();
 });
@@ -349,7 +350,7 @@ scene.on('track', function () {
   scene.speakerIn.setTranslationY(0).setScale(5, 5, 2);
   scene.video1.setTranslationY(0).setScale(650, 650, 1);
   scene.year2017.setTranslationY(-1650).setScale(10, 10, 10);
-  scene.video2.setScale(1500, 1122, 1).setTranslation(-30, -850 , 600);
+  scene.video2.setScale(1700, 1322, 1).setTranslation(-70, -850 , 600);
 
   buttonsOnTrack();
 });
