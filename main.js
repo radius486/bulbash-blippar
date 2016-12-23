@@ -510,7 +510,7 @@ function showHidePlayer(flag) {
 }
 
 function playSound(name, duration) {
-  var duration = duration * 1000;
+  var durationNumber = duration * 1000;
   scene.play.setHidden(true);
   scene.stop.setHidden(false);
   scene.playSound(name, false);
@@ -522,14 +522,16 @@ function playSound(name, duration) {
     speaker.animation(5.3);
   }
 
-  delay2(duration, function() {
+  delay2(durationNumber, function() {
     trackCounter();
     speaker.animationStop();
     delay2(2000, function() {
-      if(random) {
-        playSound(randomList[trackNumber][0], randomList[trackNumber][1]);
-      } else {
-        playSound(music[currentCategory][trackNumber][0], music[currentCategory][trackNumber][1]);
+      if(playing) {
+        if(random) {
+          playSound(randomList[trackNumber][0], randomList[trackNumber][1]);
+        } else {
+          playSound(music[currentCategory][trackNumber][0], music[currentCategory][trackNumber][1]);
+        }
       }
     });
 
@@ -743,7 +745,7 @@ var music = {
   ],
 
   'list5': [
-    ['2_2_1_17.mp3', 33],
+    ['2_2_1_17.mp3', 17],
     ['2_2_2_18.mp3', 18],
     ['2_2_3_17.mp3', 17],
     ['2_2_4_49.mp3', 49],
@@ -754,7 +756,7 @@ var music = {
   ],
 
   'list6': [
-    ['2_3_1_33.mp3', 49],
+    ['2_3_1_33.mp3', 33],
     ['2_3_2_47.mp3', 47],
     ['2_3_3_35.mp3', 35],
     ['2_3_4_63.mp3', 63],
@@ -772,7 +774,7 @@ var music = {
   ],
 
   'list7': [
-    ['3_1_1_61.mp3', 55],
+    ['3_1_1_61.mp3', 61],
     ['3_1_2_66.mp3', 66],
     ['3_1_3_94.mp3', 94],
     ['3_1_4_79.mp3', 79],
