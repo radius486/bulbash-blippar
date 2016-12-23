@@ -167,6 +167,7 @@ scene.onCreate = function() {
 
   scene.close.on('touchEnd', function() {
     stopPlaying();
+    hideCategories(true);
   });
 
   scene.buttonRed.on('touchEnd', function() {
