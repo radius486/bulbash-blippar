@@ -102,17 +102,17 @@ scene.onCreate = function() {
   scene.left = createPlane('left.png', -sW/2 + sW/4 - sW/7/2, -sH/2 + sW/4/2 - sW/8/2 + 150 , sW/8, sW/8, 'left');
   scene.right = createPlane('right.png', sW/2 - sW/4 + sW/7/2 , -sH/2 + sW/4/2 - sW/8/2 + 150 , sW/8, sW/8, 'right');
 
-  scene.category1 = createPlane('rocker_1.png', -sW/2 + 5, -sH/2 + 400, sW - 10, 120, 'left');
-  scene.category2 = createPlane('rocker_2.png', -sW/2 + 5, -sH/2 + 275, sW - 10, 120, 'left');
-  scene.category3 = createPlane('rocker_3.png', -sW/2 + 5, -sH/2 + 150, sW - 10, 120, 'left');
+  scene.category1 = createPlane('rocker_1.png', -sW/2 + 5, -sH/2 + sW/8.764 * 3 + 40, sW - 10, sW/8.764, 'left');
+  scene.category2 = createPlane('rocker_2.png', -sW/2 + 5, -sH/2 + sW/8.764 * 2 + 35, sW - 10, sW/8.764, 'left');
+  scene.category3 = createPlane('rocker_3.png', -sW/2 + 5, -sH/2 + sW/8.764 + 30, sW - 10, sW/8.764, 'left');
 
-  scene.category4 = createPlane('elka_1.png', -sW/2 + 5, -sH/2 + 400, sW - 10, 120, 'left');
-  scene.category5 = createPlane('elka_2.png', -sW/2 + 5, -sH/2 + 275, sW - 10, 120, 'left');
-  scene.category6 = createPlane('elka_3.png', -sW/2 + 5, -sH/2 + 150, sW - 10, 120, 'left');
+  scene.category4 = createPlane('elka_1.png', -sW/2 + 5, -sH/2 + sW/8.764 * 3 + 40, sW - 10, sW/8.764, 'left');
+  scene.category5 = createPlane('elka_2.png', -sW/2 + 5, -sH/2 + sW/8.764 * 2 + 35, sW - 10, sW/8.764, 'left');
+  scene.category6 = createPlane('elka_3.png', -sW/2 + 5, -sH/2 + sW/8.764 + 30, sW - 10, sW/8.764, 'left');
 
-  scene.category7 = createPlane('haligali_1.png', -sW/2 + 5, -sH/2 + 400, sW - 10, 120, 'left');
-  scene.category8 = createPlane('haligali_2.png', -sW/2 + 5, -sH/2 + 275, sW - 10, 120, 'left');
-  scene.category9 = createPlane('haligali_3.png', -sW/2 + 5, -sH/2 + 150, sW - 10, 120, 'left');
+  scene.category7 = createPlane('haligali_1.png', -sW/2 + 5, -sH/2 + sW/8.764 * 3 + 40, sW - 10, sW/8.764, 'left');
+  scene.category8 = createPlane('haligali_2.png', -sW/2 + 5, -sH/2 + sW/8.764 * 2 + 35, sW - 10, sW/8.764, 'left');
+  scene.category9 = createPlane('haligali_3.png', -sW/2 + 5, -sH/2 + sW/8.764 + 30, sW - 10, sW/8.764, 'left');
 
   scene.legal = createPlane('legal.png', -sW/2 + 5, -sH/2 + 5, sW - 10, 140, 'left');
 
